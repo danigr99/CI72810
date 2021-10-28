@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class ejercicio1 {
+    public static void main(String[] args) {
+
+        //Introduzco la ruta del fichero por la linea de comandos	
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Introduzca una ruta:");
+        String dir = sc.nextLine();
+
+        //Chero un objeto File a partir de la ruta introducida
+        File file = new File(dir);
+
+        try{
+            //Intento borrar el fichero
+            boolean estado = file.delete();
+
+            //Si el fichero no se puede borrar entonces:
+            if(!estado) {
+
+                //Creo un array con todo lo que hay dentro del fichero
+                File listFile[] = file.listFiles();
+                int sizeList = file.listFiles().length; //Saco el numero de archivos dentro de ese fichero
+
+                //Borro todos los elementos guardados en el array
+                for(int j=0; j<sizeList; j++) {
+                        listFile[j].delete();
+                }
+
+                //Borro de nuevo el archivo una vez vacio.
+                file.delete();
+                System.out.printf("El fichero y su contenido se ha eliminado correctamente");
+
+        }else {
+            System.out.printf("El fichero se ha eliminado correctamente");
+        }
+
+        }catch(Exception e) {
+                System.out.printf("Se ha producido un error fatal #0");
+        }	
+
+    }
+}
