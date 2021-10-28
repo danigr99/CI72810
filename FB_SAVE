@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class ejercicio3 {    
+        
+    public static void main(String[] args) throws IOException{                        
+         
+        try {
+            File file = new File("Departamentos.dat");//Creo el objeto file con la ruta necesaria
+            RandomAccessFile rdFile = new RandomAccessFile(file, "rw");
+            
+            int dept[] = {1, 2, 3, 4, 5};
+            String nombre[] = {"LENGUA", "CIENCIA", "RELIGION", "HISTORIA", "FISICA"};
+            String localidad[] = {"ILLORA", "GRANADA", "CORDOBA", "MALAGA", "HUELVA"};
+            
+            //Defino el número de elementos que se encuentro en el array que voy a usar como 'contador'
+            int cont = nombre.length;
+            
+            //Declaro un StringBuffer para poder escribir y leer en el archivo
+            StringBuffer stbf = null;
+            
+            for(int i=0; i<cont; i++) {
+                rdFile.writeInt(i+1);//Escribe el id para cada departamento
+                stbf = new StringBuffer(nombre[i]);
+                stbf.setLength(10);//Para que de 10 caracteres a cada string que le pasemos
+                
+                rdFile.writeInt(dept[i]);//Inserto el departamento
+                rdFile.writeChars(stbf.toString());//Inserto nombre (en este caso)
+                
+                stbf = new StringBuffer(localidad[i]);//Cambio el buffer para introducir la localidad
+                stbf.setLength(10); 
+                rdFile.writeChars(stbf.toString());//Inserto localidad (En este caso)
+            }
+            
+            
+            rdFile.close();
+            
+        }catch(IOException e) {
+            System.out.println("No se ha podido crear el archivo.");
+        }
+        
+    }
+}
