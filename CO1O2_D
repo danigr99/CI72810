@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class ejercicio2 {
+    public static void main(String[] args) throws IOException{
+        
+        /*Realiza un programa que copie el contenido de dos ficheros de entrada 
+        en uno de salida. El nombre de los ficheros, origen y destino, 
+        se introducen desde la línea de comandos al ejecutar el programa.*/
+ 
+        //Paso la ruta de los ficheros.
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduza la ruta del archivo origen 1");
+        String ruta1 = sc.nextLine();
+        System.out.println("Introduzca la ruta del archivo origen 2");
+        String ruta2 = sc.nextLine();
+        System.out.println("Introduzca la ruta del archivo destino");
+        String rutaD = sc.nextLine();
+        
+        //Creo el objeto File para cada ruta
+        File archivoO1 = new File(ruta1);//Defino la ruta del archivo origen 1.
+        FileReader frO1 = new FileReader(archivoO1);//Creo el flujo de lectura para la ruta.
+        BufferedReader brFile01 = new BufferedReader(frO1);//Creo un objeto BufferedReader para poder leer el texto del archivo.
+        
+        File archivoO2 = new File(ruta2);//Defino la ruta del archivo de origen 2.
+        FileReader frO2 = new FileReader(archivoO2);
+        BufferedReader brFile02 = new BufferedReader(frO2);
+        
+        File archivoD = new File(rutaD);//Defino la ruta del archivo destino.
+        FileWriter fwD = new FileWriter(archivoD);//Creo el flujo de escritura para la ruta
+        PrintWriter pw = new PrintWriter(fwD);//Creo un objeto PrintWriter para poder escribir
+           
+        
+        //Guardo el contenido de los dos archivos de origen.
+        String txtO1 = brFile01.readLine();
+        String txtO2 = brFile02.readLine();
+        
+        pw.println(txtO1);
+        pw.println(txtO2);
+        
+        System.out.println("Archivos de ruta 1 y ruta 2 copiados correctamente en 'Destino.txt'");
+        
+        frO1.close();
+        frO2.close();
+        pw.close();
+    }
+}
